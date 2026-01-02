@@ -235,7 +235,7 @@ export const storageService = {
       return onValue(userRef, (snapshot) => {
           callback(snapshot.exists() ? snapshot.val() : null);
       }, (error) => {
-          console.warn("Subscribe User Error:", error.code);
+          console.warn("Subscribe User Error:", (error as any).code);
       });
   },
 
@@ -391,7 +391,7 @@ export const storageService = {
           
           callback(myChats);
       }, (error) => {
-           console.warn("Subscribe Chats Error:", error.code);
+           console.warn("Subscribe Chats Error:", (error as any).code);
       });
   },
 
@@ -455,7 +455,7 @@ export const storageService = {
               callback([]);
           }
       }, (error) => {
-          console.warn("Subscribe Messages Error:", error.code);
+          console.warn("Subscribe Messages Error:", (error as any).code);
       });
   },
 
