@@ -1,0 +1,5 @@
+{
+  "name": "MavisChatWeb",
+  "description": "A minimalist, monochrome instant messaging application featuring user authentication, real-time message simulation, profile management, and dark mode.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MavisChatWeb</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              darkbg: '#000000',
+              darksurface: '#121212',
+              darkborder: '#2A2A2A'
+            },
+            animation: {
+              'shimmer': 'shimmer 2s linear infinite',
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'slide-up': 'slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            },
+            keyframes: {
+              shimmer: {
+                '0%': { backgroundPosition: '-1000px 0' },
+                '100%': { backgroundPosition: '1000px 0' }
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: 0 },
+                '100%': { transform: 'translateY(0)', opacity: 1 }
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px; 
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(156, 163, 175, 0.5);
+        border-radius: 4px;
+      }
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+      
+      body {
+        -webkit-tap-highlight-color: transparent;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #000;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Global Transitions for Theme Switch */
+      * {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+      }
+
+      /* Animations */
+      @keyframes slideInRight {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+      }
+      
+      @keyframes slideInUpMessage {
+        from { 
+          opacity: 0;
+          transform: translateY(10px) scale(0.98); 
+        }
+        to { 
+          opacity: 1;
+          transform: translateY(0) scale(1); 
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      .animate-slide-in-right {
+        animation: slideInRight 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+
+      .animate-message-enter {
+        animation: slideInUpMessage 0.25s ease-out forwards;
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      .animate-spin-slow {
+        animation: spin 1.5s linear infinite;
+      }
+
+      /* Skeleton Shimmer Effect */
+      .skeleton-bg {
+        background: linear-gradient(to right, #f3f4f6 8%, #e5e7eb 18%, #f3f4f6 33%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s linear infinite;
+      }
+      .dark .skeleton-bg {
+        background: linear-gradient(to right, #1f2937 8%, #374151 18%, #1f2937 33%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s linear infinite;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "vite": "https://esm.sh/vite@^7.3.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-50 dark:bg-black text-black dark:text-white h-screen w-screen overflow-hidden flex justify-center">
+    <div id="root" class="h-full w-full max-w-md bg-white dark:bg-black relative shadow-2xl overflow-hidden transition-colors duration-300"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
