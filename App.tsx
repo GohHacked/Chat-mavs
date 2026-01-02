@@ -119,7 +119,7 @@ const App: React.FC = () => {
   // Splash Screen
   if (initializing) {
       return (
-          <div className={`${theme === 'dark' ? 'dark' : ''} h-full w-full bg-white dark:bg-black flex items-center justify-center`}>
+          <div className={`${theme === 'dark' ? 'dark' : ''} h-[100dvh] w-full bg-white dark:bg-black flex items-center justify-center`}>
               <div className="flex flex-col items-center animate-fade-in">
                   <div className="relative mb-4">
                        <span className="text-6xl font-extrabold tracking-tight text-black dark:text-white">M</span>
@@ -141,7 +141,7 @@ const App: React.FC = () => {
   // Render Auth without theme wrapper logic inside (it has its own bg)
   if (!currentUser) {
     return (
-      <div className={theme === 'dark' ? 'dark' : ''}>
+      <div className={`${theme === 'dark' ? 'dark' : ''} h-[100dvh]`}>
          <Auth onLogin={handleLogin} t={t} />
       </div>
     );
@@ -150,7 +150,7 @@ const App: React.FC = () => {
   // Admin Panel Full Screen Overlay
   if (showAdminPanel && currentUser.isAdmin) {
       return (
-        <div className={`${theme === 'dark' ? 'dark' : ''} h-full w-full`}>
+        <div className={`${theme === 'dark' ? 'dark' : ''} h-[100dvh] w-full`}>
             <div className="h-full w-full bg-white dark:bg-black relative overflow-hidden">
                 <AdminPanel onBack={() => setShowAdminPanel(false)} t={t} />
             </div>
@@ -159,11 +159,12 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`${theme === 'dark' ? 'dark' : ''} h-full w-full`}>
+    <div className={`${theme === 'dark' ? 'dark' : ''} h-[100dvh] w-full`}>
       <div className="h-full w-full bg-white dark:bg-black relative overflow-hidden transition-colors duration-300">
         {/* Main Content Layer */}
         <div className={`h-full flex flex-col transition-transform duration-300 ${activeChatId ? 'scale-95 opacity-90' : 'scale-100 opacity-100'}`}>
-          <div className="flex-1 overflow-hidden relative">
+          {/* Use min-h-0 to allow flex child to scroll */}
+          <div className="flex-1 min-h-0 overflow-hidden relative flex flex-col">
             {activeTab === Tab.CHATS && (
               <ChatList 
                 currentUser={currentUser} 
@@ -190,12 +191,13 @@ const App: React.FC = () => {
               />
             )}
           </div>
+          {/* Bottom Nav outside the scrollable area */}
           <BottomNav currentTab={activeTab} onTabChange={setActiveTab} t={t} />
         </div>
 
         {/* Chat Screen Layer - Slides over the top */}
         {activeChatId && (
-          <div className="absolute inset-0 z-50 bg-white dark:bg-black animate-slide-in-right shadow-2xl">
+          <div className="absolute inset-0 z-50 bg-white dark:bg-black animate-slide-in-right shadow-2xl h-[100dvh]">
             <ChatScreen 
               chatId={activeChatId} 
               currentUser={currentUser} 
